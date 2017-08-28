@@ -1,0 +1,7 @@
+C:\Users\John\Desktop\Programming\csharp\michael-reeves-tutorials\Meme\Meme\bin\Debug\Meme.exe.config
+C:\Users\John\Desktop\Programming\csharp\michael-reeves-tutorials\Meme\Meme\bin\Debug\Meme.exe
+C:\Users\John\Desktop\Programming\csharp\michael-reeves-tutorials\Meme\Meme\bin\Debug\Meme.pdb
+C:\Users\John\Desktop\Programming\csharp\michael-reeves-tutorials\Meme\Meme\obj\Debug\Meme.csprojResolveAssemblyReference.cache
+C:\Users\John\Desktop\Programming\csharp\michael-reeves-tutorials\Meme\Meme\obj\Debug\Meme.csproj.CoreCompileInputs.cache
+C:\Users\John\Desktop\Programming\csharp\michael-reeves-tutorials\Meme\Meme\obj\Debug\Meme.exe
+C:\Users\John\Desktop\Programming\csharp\michael-reeves-tutorials\Meme\Meme\obj\Debug\Meme.pdb
