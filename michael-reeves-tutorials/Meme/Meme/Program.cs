@@ -4,6 +4,8 @@ namespace Meme
 {
     class Program
     {
+        private static int x;
+
         static void Main(string[] args)
         {
 
@@ -20,6 +22,7 @@ namespace Meme
 
             SimpleMethod();
             Console.WriteLine("");
+            IfStatementTest();
 
         }
 
@@ -27,7 +30,22 @@ namespace Meme
         {
             Console.Write("Your name: ");
             string input = Console.ReadLine();
-            Console.WriteLine("Name: " + input);
+            Console.Write("What is your age: ");
+            string age = Console.ReadLine();
+            x = Int32.Parse(age);
+            Console.WriteLine("My name is: " + input + " and I am " + age);
+        }
+
+        private static void IfStatementTest()
+        {
+            if (x == 10)
+            {
+                Console.WriteLine("Age is equal to 10");
+            }
+            else
+            {
+                Console.WriteLine(x + " does not equal 10");
+            }
         }
     }
 }
