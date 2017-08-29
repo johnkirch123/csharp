@@ -18,6 +18,16 @@ namespace Meme
             Console.WriteLine("Do the circles intersect? ");
             Console.WriteLine(intersects);
 
+            SimpleMethod();
+            Console.WriteLine("");
+
+        }
+
+        private static void SimpleMethod()
+        {
+            Console.Write("Your name: ");
+            string input = Console.ReadLine();
+            Console.WriteLine("Name: " + input);
         }
     }
 }
