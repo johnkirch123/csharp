@@ -19,7 +19,7 @@ namespace Johns_First_Forms_Project
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Hell John, you rock!");
+            MessageBox.Show("Hell John, you rock!", "The Best");
         }
     }
 }
