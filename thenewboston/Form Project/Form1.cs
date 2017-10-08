@@ -19,12 +19,12 @@ namespace WindowsFormsApp2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Hello John", "Hey!");
-        }
-
-        private void button1_MouseHover(object sender, EventArgs e)
-        {
-            MessageBox.Show("You Hovered!");
+            string name = "John Kirch";
+            int number = 37;
+            bool old = true;
+            object myObject = MessageBox.Show(name);
+            MessageBox.Show(old.ToString(), number.ToString());
+            MessageBox.Show(myObject.ToString());
         }
     }
 }
