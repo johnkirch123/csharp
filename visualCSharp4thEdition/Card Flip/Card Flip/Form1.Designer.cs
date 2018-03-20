@@ -88,7 +88,7 @@
             this.Controls.Add(this.cardFrontImage);
             this.Controls.Add(this.cardBackImage);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Hearthstone";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.cardFrontImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardBackImage)).EndInit();
