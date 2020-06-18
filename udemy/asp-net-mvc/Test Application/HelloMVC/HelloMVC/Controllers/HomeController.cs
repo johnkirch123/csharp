@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Caching;
 using System.Web;
 using System.Web.Mvc;
 using HelloMVC.Models;
@@ -9,6 +10,33 @@ namespace HelloMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private ObjectCache cache = MemoryCache.Default;
+        private List<Customer> customers;
+
+        public HomeController()
+        {
+            customers = cache["customers"] as List<Customer>;
+            if (customers == null)
+            {
+                customers = new List<Customer>();
+            }
+        }
+
+        public void SaveCache()
+        {
+            cache["customers"] = customers;
+        }
+
+        public PartialViewResult Basket()
+        {
+            BasketViewModel model = new BasketViewModel();
+
+            model.BasketCount = 5;
+            model.BasketTotal = "$100";
+
+            return PartialView(model);
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -29,15 +57,18 @@ namespace HelloMVC.Controllers
             return View();
         }
 
-        public ActionResult ViewCustomer(Customer postedCustomer)
+        public ActionResult ViewCustomer(string id)
         {
-            Customer customer = new Customer();
+            Customer customer = customers.FirstOrDefault(c => c.Id == id);
 
-            customer.Id = Guid.NewGuid().ToString();
-            customer.Name = postedCustomer.Name;
-            customer.Telephone = postedCustomer.Telephone;
-
-            return View(customer);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(customer);
+            }
         }
 
         public ActionResult AddCustomer()
@@ -45,15 +76,89 @@ namespace HelloMVC.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult AddCustomer(Customer customer)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(customer);
+            }
+
+            customer.Id = Guid.NewGuid().ToString();
+            customers.Add(customer);
+            SaveCache();
+
+            return RedirectToAction("CustomerList");
+        }
+
+        public ActionResult EditCustomer(string id)
+        {
+            Customer customer = customers.FirstOrDefault(c => c.Id == id);
+
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(customer);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditCustomer(Customer customer, string Id)
+        {
+            var customerToEdit = customers.FirstOrDefault(c => c.Id == Id);
+
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                customerToEdit.Name = customer.Name;
+                customerToEdit.Telephone = customer.Telephone;
+                SaveCache();
+
+                return RedirectToAction("CustomerList");
+            }
+        }
+
+        public ActionResult DeleteCustomer(string Id)
+        {
+            Customer customer = customers.FirstOrDefault(c => c.Id == Id);
+
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(customer);
+            }
+        }
+
+        [HttpPost]
+        [ActionName("DeleteCustomer")]
+        public ActionResult ConfirmDeleteCustomer(string Id)
+        {
+            Customer customer = customers.FirstOrDefault(c => c.Id == Id);
+
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                customers.Remove(customer);
+                return RedirectToAction("CustomerList");
+            }
+        }
+
         public ActionResult CustomerList()
         {
-            List<Customer> customers = new List<Customer>();
-
-            customers.Add(new Customer() { Name="Fred", Telephone = "12354"});
-            customers.Add(new Customer() { Name = "Sally", Telephone = "121111" });
-            customers.Add(new Customer() { Name = "Henry", Telephone = "834957" });
-
             return View(customers);
         }
+
     }
 }
